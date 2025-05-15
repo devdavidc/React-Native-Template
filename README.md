@@ -1,6 +1,6 @@
 # Welcome to your Expo template 👋
 
-This is an [Expo](https://expo.dev) template already configured with NativeWind ready to start and style any project.
+This is an [Expo](https://expo.dev) template already configured with NativeWind ready to start and style any project using [TailwindCSS](https://tailwindcss.com/).
 
 ## Get started
 
