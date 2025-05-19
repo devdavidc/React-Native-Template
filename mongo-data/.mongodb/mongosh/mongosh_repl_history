@@ -1,0 +1,3 @@
+db.Users.insertOne({ username: "ejemplo", email: "ejemplo@mail.com", password: "hashedPass" })
+use app_db
+rs.initiate()

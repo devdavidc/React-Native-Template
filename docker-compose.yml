@@ -1,0 +1,13 @@
+services:
+  mongo:
+    image: mongo
+    container_name: mongo-container
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: davidcarrenomacias
+      MONGO_INITDB_ROOT_PASSWORD: 1234
+    command: ["--auth", "--replSet", "rs0", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./mongo-data:/data/db
+      - ./mongo-keyfile:/etc/mongo-keyfile:ro
