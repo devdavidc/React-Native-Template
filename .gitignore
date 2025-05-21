@@ -24,8 +24,7 @@ yarn-error.log*
 prisma/migrations/
 
 # Docker
-mongo-data/*
-
+**/mongo-data/*
 
 # VSCode settings
 .vscode/
@@ -39,7 +38,7 @@ mongo-data/*
 # Metro cache (React Native)
 **/node_modules/.cache/
 
-# Expo (si algún día lo usas)
+# Expo
 .expo/
 .expo-shared/
 

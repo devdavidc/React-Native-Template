@@ -107,6 +107,117 @@ login = async (req, res) => {
     res.status(message === 'Invalid credentials' ? 401 : 500).json({ message });
   }
 }
+/**
+ * Obtiene un usuario por su ID.
+ */
+getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await this.userService.getUserById(id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
+/**
+ * Obtiene todos los usuarios.
+ */
+getAllUsers = async (req, res) => {
+  try {
+    const users = await this.userService.getAllUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
+/**
+ * Obtiene un usuario por su username.
+ */
+getUserByUsername = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await this.userService.getUserByUsername(username);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
+/**
+ * Obtiene un usuario por su email.
+ */
+getUserByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const user = await this.userService.getUserByEmail(email);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
+/**
+ * Actualiza los datos de un usuario.
+ */
+updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+    const user = await this.userService.updateUser(id, data);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
+/**
+ * Actualiza la contraseña de un usuario.
+ */
+updateUserPassword = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { newPassword } = req.body;
+    if (!newPassword) {
+      return res.status(400).json({ message: 'New password is required' });
+    }
+    await this.userService.updateUserPassword(id, newPassword);
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
+/**
+ * Actualiza la foto de perfil de un usuario.
+ */
+updateUserProfilePicture = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { profilePicture } = req.body;
+    if (!profilePicture) {
+      return res.status(400).json({ message: 'Profile picture is required' });
+    }
+    const user = await this.userService.updateUserProfilePicture(id, profilePicture);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
+/**
+ * Elimina un usuario por su ID.
+ */
+deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await this.userService.deleteUser(id);
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
 
 
 }
