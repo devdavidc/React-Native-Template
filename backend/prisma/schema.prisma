@@ -19,5 +19,7 @@ model User {
   email String @unique
   password String
   profilePicture String? @default("") @map("profile_image")
+  createdAt DateTime?
+  updatedAt DateTime?
 }
 

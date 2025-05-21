@@ -11,9 +11,10 @@ const userService = new UserService();
 const authController = new AuthController(userService);
 
 // Definir rutas de autenticación
+// Ruta de registro
 router.post('/register', authController.register);
 
-// Ruta de login (sin implementar aún)
+// Ruta de login
 router.post('/login', authController.login);
 
 export default router;
