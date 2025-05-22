@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View, Alert } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, Alert, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   // Función para manejar login
   const handleLogin = async () => {
@@ -21,8 +23,7 @@ export default function Login() {
 
       if (response.ok) {
         await AsyncStorage.setItem('token', data.token);
-        Alert.alert('Login correcto', `Bienvenido, ${data.user.username}`);
-        // Aquí puedes navegar a otra pantalla si usas react-navigation
+        router.replace('./home');
       } else {
         Alert.alert('Error', data.message);
       }
@@ -33,32 +34,45 @@ export default function Login() {
   };
 
   return (
-    <View className='flex-1 items-center justify-center bg-white p-10'>
+    <ScrollView
+      className="flex-1 bg-white p-10"
+      contentContainerStyle={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}
+      showsVerticalScrollIndicator={false}
+    >
       <Text className='text-3xl font-bold mb-8'>Iniciar sesión</Text>
+      <View className="w-full mb-8">
 
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        className="border border-gray-300 rounded-lg p-3 w-full mb-4 text-lg"
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-
-      <TextInput
-        placeholder="Contraseña"
-        value={password}
-        onChangeText={setPassword}
-        className="border border-gray-300 rounded-lg p-3 w-full mb-6 text-lg"
-        secureTextEntry
-      />
-
+        <Text className="text-lg font-semibold mb-2">Email</Text>
+        <TextInput
+          placeholder="ejemplo@email.com"
+          value={email}
+          onChangeText={setEmail}
+          className="border border-gray-300 rounded-lg p-3 w-full mb-4 text-lg"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+      </View>
+      <View className="w-full mb-8">
+        <Text className="text-lg font-semibold mb-2">Contraseña</Text>
+        <TextInput
+          placeholder="••••••••"
+          value={password}
+          onChangeText={setPassword}
+          className="border border-gray-300 rounded-lg p-3 w-full mb-6 text-lg"
+          secureTextEntry
+        />
+      </View>
+      <Text className="text-sm text-blue-500 mb-4"
+        onPress={() => router.replace('/(tabs)/register')}
+      >
+        ¿No tienes una cuenta? ¡Registrate!
+      </Text>
       <TouchableOpacity
-        className='bg-emerald-500 p-4 rounded-lg w-full mb-4'
+        className="bg-primary p-4 rounded-lg w-full"
         onPress={handleLogin}
       >
-        <Text className="text-white text-2xl font-bold text-center">Entrar</Text>
+        <Text className="text-light-100 text-center text-lg font-bold">Entrar</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
