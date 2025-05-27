@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Home, Settings, User } from 'lucide-react-native';
+import { Home, Settings, SquarePlus, User } from 'lucide-react-native';
 
 export default function TabsLayout() {
   return (
@@ -19,7 +19,14 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
         }}
       />
-            <Tabs.Screen
+      <Tabs.Screen
+        name="new-recipe"
+        options={{
+          title: 'Añadir Receta',
+          tabBarIcon: ({ color, size }) => <SquarePlus color={color} size={size} />,
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: 'Perfil',

@@ -24,7 +24,9 @@ yarn-error.log*
 prisma/migrations/
 
 # Docker
-**/mongo-data/*
+backend/docker/mongo-data/*
+backend/docker/mongo-keyfile
+
 
 # VSCode settings
 .vscode/

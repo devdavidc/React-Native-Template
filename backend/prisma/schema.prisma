@@ -23,3 +23,27 @@ model User {
   createdAt      DateTime?
   updatedAt      DateTime?
 }
+
+model Recipe {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  image       String?
+  prepTime    Int?
+  cookTime    Int?
+  servings    Int?
+  category    String?
+  ingredients String[]
+  steps       Json
+  createdAt   DateTime?
+  updatedAt   DateTime?
+}
+
+/*model Step {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  stepNumber  Int
+  description String
+  image       String?
+  video       String?
+  timer       Int?  // en segundos
+}*/

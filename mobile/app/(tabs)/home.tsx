@@ -23,10 +23,24 @@ export default function Home() {
         className="flex-1 bg-white p-10"
         showsVerticalScrollIndicator={false}>
 
-        <View className="flex-row items-center mt-4">
+        <View className="flex-column items-center mt-4">
           <Card
             title='Tarjeta de prueba'
             description='Esta es una tarjeta de prueba donde mostraremos una receta.'
+            footer={
+              <Text className='text-sm text-gray-500'>Desarrollado por David Carreño</Text>
+            }
+            className='mb-6 w-full'
+            onPress={() => console.log('Card pressed')}
+          >
+            <Image
+              source={{ uri: 'https://picsum.photos/800/600' }}
+              style={{ width: '100%', height: 200, borderRadius: 10, marginTop: 10 }}
+            />
+          </Card>
+          <Card
+            title='Tarjeta de prueba 2'
+            description='Esta es otra tarjeta de prueba donde mostraremos otra receta.'
             footer={
               <Text className='text-sm text-gray-500'>Desarrollado por David Carreño</Text>
             }
