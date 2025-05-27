@@ -16,7 +16,7 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch('http://192.168.0.102:3000/api/auth/register', {
+      const response = await fetch('http://192.168.0.100:3000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
@@ -27,7 +27,7 @@ export default function Register() {
       if (response.ok) {
         await AsyncStorage.setItem('token', data.token);
         Alert.alert('Registro exitoso', 'Bienvenido ' + data.user.username);
-        router.replace('/(tabs)/login');
+        router.replace('/(auth)/login');
       } else {
         Alert.alert('Error', data.message);
       }
@@ -76,7 +76,7 @@ export default function Register() {
         />
       </View>
       <Text className="text-sm text-blue-500 mb-4"
-        onPress={() => router.replace('/(tabs)/login')}
+        onPress={() => router.replace('/(auth)/login')}
       >
         ¿Ya tienes una cuenta? Inicia sesión
       </Text>

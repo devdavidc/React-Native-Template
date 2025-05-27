@@ -11,7 +11,7 @@ export default function Login() {
   // Función para manejar login
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://192.168.0.102:3000/api/auth/login', {
+      const response = await fetch('http://192.168.0.100:3000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export default function Login() {
 
       if (response.ok) {
         await AsyncStorage.setItem('token', data.token);
-        router.replace('./home');
+        router.replace('/(tabs)/home');
       } else {
         Alert.alert('Error', data.message);
       }
@@ -39,7 +39,7 @@ export default function Login() {
       contentContainerStyle={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}
       showsVerticalScrollIndicator={false}
     >
-      <Text className='text-3xl font-bold mb-8'>Iniciar sesión</Text>
+      
       <View className="w-full mb-8">
 
         <Text className="text-lg font-semibold mb-2">Email</Text>
@@ -63,7 +63,7 @@ export default function Login() {
         />
       </View>
       <Text className="text-sm text-blue-500 mb-4"
-        onPress={() => router.replace('/(tabs)/register')}
+        onPress={() => router.replace('/(auth)/register')}
       >
         ¿No tienes una cuenta? ¡Registrate!
       </Text>

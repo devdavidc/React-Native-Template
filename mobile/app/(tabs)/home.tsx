@@ -1,33 +1,53 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
+import { Text, TouchableOpacity, ScrollView, Image, View, SafeAreaView } from 'react-native'
 import React from 'react'
-import CustomHeader from '@/components/header'
+import Card from '@/components/card'
+import { LogOut } from 'lucide-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRouter } from 'expo-router'
 
 export default function Home() {
-
   const router = useRouter();
+
   const handleLogout = async () => {
     try {
       await AsyncStorage.removeItem('token')
-      router.replace('/(tabs)/login')
+      router.replace('/(auth)/login')
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
     }
   }
+
   return (
-   <ScrollView
-         className="flex-1 bg-white p-10"
-         contentContainerStyle={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}
-         showsVerticalScrollIndicator={false}>
-      <CustomHeader />
-      <Text className='text-3xl font-bold mb-8'>HOME</Text>
-      <TouchableOpacity
-        className='bg-primary p-4 rounded-lg w-full '
-        onPress={handleLogout}
-      >
-        <Text className='text-light-100 text-center text-lg font-bold'>Cerrar sesión</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    <SafeAreaView className='flex-1 bg-[#FFFDF9]'>
+      <ScrollView
+        className="flex-1 bg-white p-10"
+        showsVerticalScrollIndicator={false}>
+
+        <View className="flex-row items-center mt-4">
+          <Card
+            title='Tarjeta de prueba'
+            description='Esta es una tarjeta de prueba donde mostraremos una receta.'
+            footer={
+              <Text className='text-sm text-gray-500'>Desarrollado por David Carreño</Text>
+            }
+            className='mb-6 w-full'
+            onPress={() => console.log('Card pressed')}
+          >
+            <Image
+              source={{ uri: 'https://picsum.photos/800/600' }}
+              style={{ width: '100%', height: 200, borderRadius: 10, marginTop: 10 }}
+            />
+          </Card>
+        </View>
+
+        <TouchableOpacity
+          onPress={handleLogout}
+          className="ml-auto p-2 rounded-full bg-white shadow-md"
+          activeOpacity={0.7}
+        >
+          <LogOut size={24} color="black" />
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
