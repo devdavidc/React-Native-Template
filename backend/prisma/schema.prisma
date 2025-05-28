@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  username       String    @unique
+  email          String    @unique
+  password       String
+  profilePicture String?   @default("") @map("profile_image")
+  role           String    @default("user")
+  createdAt      DateTime?
+  updatedAt      DateTime?
+}
+
+model Recipe {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  image       String?
+  prepTime    Int?
+  cookTime    Int?
+  servings    Int?
+  category    String?
+  ingredients String[]
+  steps       Json
+  createdAt   DateTime?
+  updatedAt   DateTime?
+}
+
+/*model Step {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  stepNumber  Int
+  description String
+  image       String?
+  video       String?
+  timer       Int?  // en segundos
+}*/

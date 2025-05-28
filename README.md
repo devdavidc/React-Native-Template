@@ -1,8 +1,29 @@
 # Welcome to your Expo template 👋
 
-This is an [Expo](https://expo.dev) template already configured with NativeWind ready to start and style any project using [TailwindCSS](https://tailwindcss.com/).
+## Mongodb start
+
+To configure the mongodb Docker container run this command:
+
+```bash
+docker run -d --name mongo-container \                                                 
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=<your_user> \
+  -e MONGO_INITDB_ROOT_PASSWORD=<your_password> \
+  -v $(pwd)/mongo-data:/data/db \
+  -v $(pwd)/mongo-keyfile:/etc/mongo-keyfile:ro \
+  mongo --auth --replSet rs0 --keyFile /etc/mongo-keyfile
+```
+Then run this one
+```bash
+docker exec -it mongo-container mongosh -u <your_user> -p <your_password> --authenticationDatabase admin
+```
+Now you should be able to connect to the mongodb server from your machine.
+
+> Remember to use your IP adress if you're using your phone to run the app.
 
 ## Get started
+
+This is an [Expo](https://expo.dev) template already configured with NativeWind ready to start and style any project using [TailwindCSS](https://tailwindcss.com/).
 
 1. Install dependencies
 

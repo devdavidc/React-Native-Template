@@ -1,0 +1,23 @@
+rs.status()
+rs.reconfig(cfg, { force: true })
+cfg.members[0].host = "localhost:27017"
+cfg = rs.conf()
+rs.conf()
+rs.status()
+test> rs.status()
+MongoServerError[AlreadyInitialized]: already initialized
+...
+... })
+...   ]
+...     { _id: 0, host: "localhost:27017" }
+...   members: [
+...   _id: "rs0",
+test> rs.initiate({
+rs.status()
+})
+  ]
+    { _id: 0, host: "localhost:27017" }
+  members: [
+  _id: "rs0",
+rs.initiate({
+rs.initiate()
